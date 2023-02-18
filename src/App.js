@@ -11,3 +11,5 @@ export default function App() {
     </h1>
   );
 }
+
+// isGoingOut === True ? "YES" : "NO"
