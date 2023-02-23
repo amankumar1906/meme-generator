@@ -9,6 +9,14 @@ export default function Meme() {
   });
   const [allMemeImages, setAllMemeImages] = React.useState(memesData);
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  }
+
   function getMemeImage() {
     const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
@@ -21,13 +29,39 @@ export default function Meme() {
   return (
     <main>
       <div className="form">
-        <input placeholder="Top text" className="form--input" type="text" />
-        <input placeholder="Bottom Text" className="form--input" type="text" />
+        <input
+          placeholder="Top text"
+          className="form--input"
+          type="text"
+          name="topText"
+          value={meme.topText}
+          onChange={handleChange}
+        />
+        <input
+          placeholder="Bottom Text"
+          className="form--input"
+          type="text"
+          name="bottomText"
+          value={meme.bottomText}
+          onChange={handleChange}
+        />
         <button className="form--button" onClick={getMemeImage}>
           Get a new meme image 🖼
         </button>
       </div>
-      <img src={meme.randomImage} className="meme--image" />
+      <div className="meme">
+        <img src={meme.randomImage} className="meme--image" />
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
+      </div>
     </main>
   );
 }
+
+// function toggle(id) {
+//   setSquares((prevSquares) => {
+//     return prevSquares.map((square) => {
+//       return square.id == id ? { ...square, on: !square.on } : square;
+//     });
+//   });
+// }
